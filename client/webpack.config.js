@@ -9,27 +9,32 @@ module.exports = () => {
     entry: {
       main: "./src/js/index.js",
       install: "./src/js/install.js",
+      database: "./src/js/database.js",
+      editor: "./src/js/editor.js",
+      header: "./src/js/header.js",
     },
     output: {
       filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
     },
     plugins: [
+      // Webpack plugin that generates our html file and injects our bundles
       new HtmlWebpackPlugin({
         template: "./index.html",
         title: "JATE",
       }),
+      // Injects our custom servie worker
       new InjectManifest({
         swSrc: "./src-sw.js",
         swDest: "src-sw.js",
       }),
+      // Creates a manifest.json file.
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
         name: "Just Another Text Editor",
-        short_name: "J.A.T.E",
-        description:
-          "This is an app that created a text editor: Just Another Text Editor!",
+        short_name: "JATE",
+        description: "Just another text editor",
         background_color: "#225ca3",
         theme_color: "#225ca3",
         start_url: "/",
@@ -37,15 +42,15 @@ module.exports = () => {
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
-            sizes: [96, 128, 192, 256, 384, 512], // Various image sizes
+            sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join("assets", "icons"),
           },
         ],
       }),
     ],
 
-    // Add Babel and CSS loaders to webpack
     module: {
+      // CSS Loaders
       rules: [
         {
           test: /\.css$/i,
@@ -54,6 +59,7 @@ module.exports = () => {
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
+          // We use babel-loader in order to use ES6.
           use: {
             loader: "babel-loader",
             options: {
