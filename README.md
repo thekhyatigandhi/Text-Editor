@@ -55,13 +55,7 @@ The following photos show how the application looks:
 
 ## Usage
 
-To use the House Hunter application, follow the steps below:
-
-- Type the following command in your termimal:
-
-npm run start
-
-Then open Insomnia and type http://localhost:3002/ to run this application on your local machine.
+Once the app is running in nodeJS then open http://localhost:3001/ in any browser, and you will have your text editor. You can download the text editor using the install button on top-left and you will be able to access it offline, You can save the data and close the app, once you open the app again you will find your content as you left before.
 
 ## Contributing
 
